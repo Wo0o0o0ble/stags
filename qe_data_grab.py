@@ -66,7 +66,7 @@ def find_nnm(file_name):
             bader_volume += float(line.split()[5])
         if ' ?? ' in line:
             no_nnm += 1
-            bader_charge += float(line.split()[8])
+            bader_charge += float(line.split()[7])
             bader_volume += float(line.split()[6])
     return no_nnm, bader_charge, bader_volume
 
