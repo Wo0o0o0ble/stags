@@ -48,5 +48,30 @@ def find_scf_energy(file_name):
             energy = float(line.split()[4])
     return energy
 
+def grab_coords(log_file):
+    log_file = open('%s.log' % log_file)
+    coords = []
+    for line in log_file:
+        if 'Optimization completed.' in line:
+            break
+
+    for line in log_file:
+        if 'Standard orientation:' in line:
+            break
+
+    line = log_file.next()
+    line = log_file.next()
+    line = log_file.next()
+    line = log_file.next()
+    for line in log_file:
+        if '-----------' in line:
+           break
+        else:
+            a, b, c, d, e, f = line.split()
+            coords.append([b, float(d), float(e), float(f)])
+
+    return coords
+
+
 
 

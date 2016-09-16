@@ -141,7 +141,13 @@ def find_fermi(file_name):
             fermi = line.split()[4]
     return fermi
 
-
+# Find the calculated stress from a qe output
+def find_stress(file_name):
+    infile = open('%s.scf.out' % file_name, 'r')
+    for line in infile:
+	if 'total   stress' in line:
+	    stress = float(line.split()[5])
+    return stress
 
 
 
