@@ -22,4 +22,10 @@ print "                   find_n_elect('li-9c3') gives %15.9f beta electrons" % 
 print "                      find_homo('li-9c3') gives %15.9f as the homo energy" % g09.find_homo('li-9c3')
 print "                      find_lumo('li-9c3') gives %15.9f as the lumo energy" % g09.find_lumo('li-9c3')
 print "                find_scf_energy('li-9c3') gives %15.9f as the scf energy" % g09.find_scf_energy('li-9c3')
+print "               find_xdm_energy('co2_co2') gives %15.9f as the total energy" % g09.find_xdm_energy('co2_co2')[0]
+print "               find_xdm_energy('co2_co2') gives %15.9f as the diespersion energy" % g09.find_xdm_energy('co2_co2')[1]
+print "                    grab_coords('li-9c3') gives the coordinates of the last optimization step"
+coords = g09.grab_coords('li-9c3')
+for i in coords:
+    print "%10.3s %10.6f %10.6f %10.6f" % (i[0], i[1], i[2], i[3])
 

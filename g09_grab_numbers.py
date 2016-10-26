@@ -48,6 +48,16 @@ def find_scf_energy(file_name):
             energy = float(line.split()[4])
     return energy
 
+def find_xdm_energy(file_name):
+    log_file = open('%s.log' % file_name)
+    for line in log_file:
+        if 'total energy (SCF+XDM)' in line:
+            tot_ene = float(line.split()[3])
+        if 'dispersion energy' in line:
+            disp_ene = float(line.split()[2])
+    return tot_ene, disp_ene
+
+
 def grab_coords(log_file):
     log_file = open('%s.log' % log_file)
     coords = []
