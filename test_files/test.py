@@ -16,6 +16,14 @@ print "      find_pro_void_volume('anti_tagfem') gives %15.9f as the promolecula
 print "           find_homo('anti_tagfem_qe432') gives %15.9f as the homo energy" % qe.find_homo('anti_tagfem_qe432', 0)
 print "           find_lumo('anti_tagfem_qe432') gives %15.9f as the lumo energy" % qe.find_lumo('anti_tagfem_qe432', 0)
 print "          find_fermi('anti_tagfem_qe432') gives %15.9f as the fermi energy" % qe.find_lumo('anti_tagfem_qe432')
+print "                 grab_coords('ca2n-exfo') gives the coordinates of the last relaxation step "
+coords, cell = qe.grab_coords('ca2n-exfo')
+print "       ATOMIC POSITIONS         "
+for i in coords:
+    print "%10.3s %10.6f %10.6f %10.6f" % (i[0], i[1], i[2], i[3])
+print "       CELL PARAPETERMS         "
+for i in cell:
+    print "%10.6f %10.6f %10.6f" % (i[0], i[1], i[2])
 print "                   find_n_elect('li-9c3') gives %15.9f electrons" % g09.find_n_elect('li-9c3')[0]
 print "                   find_n_elect('li-9c3') gives %15.9f alpha electrons" % g09.find_n_elect('li-9c3')[1]
 print "                   find_n_elect('li-9c3') gives %15.9f beta electrons" % g09.find_n_elect('li-9c3')[2]

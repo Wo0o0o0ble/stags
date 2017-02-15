@@ -149,5 +149,26 @@ def find_stress(file_name):
 	    stress = float(line.split()[5])
     return stress
 
+# Find final geometry in relaxation calculation
+def grab_coords(file_name):
+    cell = []
+    coor = []
+    infile = open('%s.scf.out' % file_name, 'r')
+    for line in infile:
+        if 'Begin final coordinates' in line:
+            break
+    for line in infile:
+        if 'CELL_PARAMETERS' in line:
+            break
+    for line in infile:
+        if 'End final coordinates' in line:
+            break
+        elif len(line.split()) == 3:
+            a,b,c=line.split()
+            cell.append([float(a), float(b), float(c)])
+        elif len(line.split()) >= 4:
+            coor.append([line.split()[0], float(line.split()[1]), float(line.split()[2]), float(line.split()[3])])
+
+    return coor, cell
 
 
