@@ -2,21 +2,35 @@ import re
 
 # Find last SCF energy in a qe output
 def find_scf_energy(file_name):
+    energy = 0.
+    test = 0
     scf_out = open('%s.scf.out' % file_name, 'r')
     for line in scf_out:
         if '!' in line:
             energy = float(line.split()[4])
+    #Discard if Job did not complete correctly
+        elif 'JOB DONE' in line:
+            test = 1
+    if test == 0:
+        energy = 0.0
     return energy
 
 # Find the last xdm correction and uncorrected SCF energy in a qe output
 def find_nonxdm_energy(file_name):
     scf_out = open('%s.scf.out' % file_name, 'r')
+    ene = 0.
+    test = 0
     xdm = 0.
     for line in scf_out:
         if 'Dispersion XDM Correction' in line:
             xdm = float(line.split()[4])
         elif '!' in line:
             ene = float(line.split()[4])
+        elif 'JOB DONE' in line:
+            test = 1
+    if test == 0:
+        ene = 0.0
+	xdm = 0.
     bare = ene - xdm
     return bare, xdm
 
