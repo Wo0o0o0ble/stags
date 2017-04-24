@@ -4,7 +4,7 @@ import re
 def find_scf_energy(file_name):
     energy = 0.
     test = 0
-    scf_out = open('%s.scf.out' % file_name, 'r')
+    scf_out = open('%s' % file_name, 'r')
     for line in scf_out:
         if '!' in line:
             energy = float(line.split()[4])
@@ -17,7 +17,7 @@ def find_scf_energy(file_name):
 
 # Find the last xdm correction and uncorrected SCF energy in a qe output
 def find_nonxdm_energy(file_name):
-    scf_out = open('%s.scf.out' % file_name, 'r')
+    scf_out = open('%s' % file_name, 'r')
     ene = 0.
     test = 0
     xdm = 0.
@@ -36,7 +36,7 @@ def find_nonxdm_energy(file_name):
 
 # Find the magnetization of a qe output
 def find_mag(file_name):
-    scf_out = open('%s.scf.out' % file_name, 'r')
+    scf_out = open('%s' % file_name, 'r')
     tot_mag, abs_mag = 0, 0
     for line in scf_out:
         if 'total magnetization' in line:
@@ -47,7 +47,7 @@ def find_mag(file_name):
 
 # find the unitcell volume qe output
 def find_unitcell_volume(file_name):
-    scf_out = open('%s.scf.out' % file_name, 'r')
+    scf_out = open('%s' % file_name, 'r')
     for line in scf_out:
         if 'unit-cell volume' in line:
             unitcell_volume = float(line.split()[3])
@@ -60,7 +60,7 @@ def find_nnm(file_name):
     bader_charge = 0
     bader_volume = 0
     nnm_m = re.compile(' n..  ')
-    yt_out = open('%s.yt.out' % file_name, 'r')
+    yt_out = open('%s' % file_name, 'r')
     for line in yt_out:
         if '* List of basins and local properties' in line:
             break
@@ -86,7 +86,7 @@ def find_nnm(file_name):
 
 # find the void volume calculated from the nci program
 def find_pro_void_volume(file_name):
-    nci_out = open('%s.nci.out' % file_name, 'r')
+    nci_out = open('%s' % file_name, 'r')
     for line in nci_out:
         if 'Void volume' in line:
             pro_void_volume = float(line.split()[-1])
@@ -96,7 +96,7 @@ def find_pro_void_volume(file_name):
 # Find the homo or appropriate (homo - n_loc) from a qe output 
 # Needs more testing
 def find_homo(file_name, n_loc = 0):
-    infile = open('%s.scf.out' % file_name,'r')
+    infile = open('%s' % file_name,'r')
     s_up = []
     for line in infile:
         if 'number of electrons' in line:
@@ -123,7 +123,7 @@ def find_homo(file_name, n_loc = 0):
 # Find the lumo or appropriate (lumo + n_loc) from a qe output 
 # Needs more testing
 def find_lumo(file_name, n_loc = 0):
-    infile = open('%s.scf.out' % file_name,'r')
+    infile = open('%s' % file_name,'r')
     s_dn = []
     for line in infile:
         if 'number of electrons' in line:
@@ -149,7 +149,7 @@ def find_lumo(file_name, n_loc = 0):
 
 # Find the fermi energy from a qe output
 def find_fermi(file_name):
-    infile = open('%s.scf.out' % file_name,'r')
+    infile = open('%s' % file_name,'r')
     for line in infile:
         if 'the Fermi energy is' in line:
             fermi = line.split()[4]
@@ -157,7 +157,7 @@ def find_fermi(file_name):
 
 # Find the calculated stress from a qe output
 def find_stress(file_name):
-    infile = open('%s.scf.out' % file_name, 'r')
+    infile = open('%s' % file_name, 'r')
     for line in infile:
 	if 'total   stress' in line:
 	    stress = float(line.split()[5])
@@ -167,7 +167,7 @@ def find_stress(file_name):
 def grab_coords(file_name):
     cell = []
     coor = []
-    infile = open('%s.scf.out' % file_name, 'r')
+    infile = open('%s' % file_name, 'r')
     for line in infile:
         if 'Begin final coordinates' in line:
             break
