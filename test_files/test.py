@@ -32,7 +32,7 @@ print "                      find_lumo('li-9c3.log') gives %15.9f as the lumo en
 print "                find_scf_energy('li-9c3.log') gives %15.9f as the scf energy" % g09.find_scf_energy('li-9c3.log')
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the total energy" % g09.find_xdm_energy('co2_co2.log')[0]
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the diespersion energy" % g09.find_xdm_energy('co2_co2.log')[1]
-print "                       find_polar(h4-mp4.log) gives %15.9f as the a_zz dipole moment" % float(g09.find_polar('h4-mp4.log')[5])
+print "                     find_polar('h4-mp4.log') gives %15.9f as the a_zz dipole moment" % float(g09.find_polar('h4-mp4.log')[5])
 print "                find_hyperpolar('h4-mp4.log') gives %15.9f as the b_zzz hyperpolarisability" % float(g09.find_hyperpolar('h4-mp4.log')[9])
 print "                       find_B05('h4-000.out') gives %15.9f as the B05 energy" % g09.find_B05('h4-000.out')[0]
 print "                       find_B05('h4-000.out') gives %15.9f as the B13-0 energy" % g09.find_B05('h4-000.out')[1]
