@@ -51,13 +51,23 @@ def find_scf_energy(file_name):
     return energy
 
 def find_ccsdt_energy(file_name):
-    energy = 0.
     log_file = open('%s' % file_name)
+    collect = ''
     for line in log_file:
-        if 'CCSD(T)= ' in line:
-            energy = float(line.split()[1].replace('D', 'E'))
+        if 'Version=' in line:
             break
-    return energy
+        if 'State=' in line:
+            break
+    for line in log_file:
+        collect += line[1:-1]
+    print collect
+    collect = re.sub('\\n ', '', collect)
+    energy = 0.
+    for i in collect.split('\\'):
+        if 'CCSD(T)=' in i:
+            energy = i.split('=')[1]
+            break
+    return float(energy)
 
 def find_xdm_energy(file_name):
     log_file = open('%s' % file_name)
