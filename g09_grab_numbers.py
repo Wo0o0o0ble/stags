@@ -43,10 +43,20 @@ def find_lumo(file_name):
     return min(occ_orbitals)
 
 def find_scf_energy(file_name):
+    energy = 0.
     log_file = open('%s' % file_name)
     for line in log_file:
         if 'SCF Done:' in line:
             energy = float(line.split()[4])
+    return energy
+
+def find_ccsdt_energy(file_name):
+    energy = 0.
+    log_file = open('%s' % file_name)
+    for line in log_file:
+        if 'CCSD(T)= ' in line:
+            energy = float(line.split()[1].replace('D', 'E'))
+            break
     return energy
 
 def find_xdm_energy(file_name):
@@ -63,7 +73,7 @@ def grab_coords(log_file):
     log_file = open('%s' % log_file)
     coords = []
     for line in log_file:
-        if 'Optimization completed.' in line:
+        if 'Optimization completed' in line:
             break
 
     for line in log_file:

@@ -30,6 +30,7 @@ print "                   find_n_elect('li-9c3.log') gives %15.9f beta electrons
 print "                      find_homo('li-9c3.log') gives %15.9f as the homo energy" % g09.find_homo('li-9c3.log')
 print "                      find_lumo('li-9c3.log') gives %15.9f as the lumo energy" % g09.find_lumo('li-9c3.log')
 print "                find_scf_energy('li-9c3.log') gives %15.9f as the scf energy" % g09.find_scf_energy('li-9c3.log')
+print "               find_ccsdt_energy('bh22f.log') gives %15.9f as the ccsd(t) energy" % g09.find_ccsdt_energy('bh22f.log')
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the total energy" % g09.find_xdm_energy('co2_co2.log')[0]
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the diespersion energy" % g09.find_xdm_energy('co2_co2.log')[1]
 print "                     find_polar('h4-mp4.log') gives %15.9f as the a_zz dipole moment" % float(g09.find_polar('h4-mp4.log')[5])
