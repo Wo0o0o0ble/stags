@@ -31,14 +31,26 @@ print "                      find_homo('li-9c3.log') gives %15.9f as the homo en
 print "                      find_lumo('li-9c3.log') gives %15.9f as the lumo energy" % g09.find_lumo('li-9c3.log')
 print "                find_scf_energy('li-9c3.log') gives %15.9f as the scf energy" % g09.find_scf_energy('li-9c3.log')
 print "               find_ccsdt_energy('bh22f.log') gives %15.9f as the ccsd(t) energy" % g09.find_ccsdt_energy('bh22f.log')
+print "                find_ccsd_energy('bh22f.log') gives %15.9f as the ccsd energy" % g09.find_ccsd_energy('bh22f.log')
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the total energy" % g09.find_xdm_energy('co2_co2.log')[0]
 print "               find_xdm_energy('co2_co2.log') gives %15.9f as the diespersion energy" % g09.find_xdm_energy('co2_co2.log')[1]
 print "                     find_polar('h4-mp4.log') gives %15.9f as the a_zz dipole moment" % float(g09.find_polar('h4-mp4.log')[5])
 print "                find_hyperpolar('h4-mp4.log') gives %15.9f as the b_zzz hyperpolarisability" % float(g09.find_hyperpolar('h4-mp4.log')[9])
 print "                       find_B05('h4-000.out') gives %15.9f as the B05 energy" % g09.find_B05('h4-000.out')[0]
 print "                       find_B05('h4-000.out') gives %15.9f as the B13-0 energy" % g09.find_B05('h4-000.out')[1]
+print "                       find_dipole('hcn.log') gives %15.9f as the absolute dipole moment" % g09.find_dipole('hcn.log')
 print "                    grab_coords('li-9c3.log') gives the coordinates of the last optimization step"
 coords = g09.grab_coords('li-9c3.log')
 for i in coords:
     print "%10.3s %10.6f %10.6f %10.6f" % (i[0], i[1], i[2], i[3])
+print "                         find_mull('hcn.log') gives the mulliken charges of each atom"
+mull = g09.find_mull('hcn.log')
+for i in mull:
+    print "%10.3s %10.4f" % (i[0], i[1])
+print "                        find_hirsh('hcn.log') gives the hirshfeld charges of each atom"
+hirsh = g09.find_hirsh('h2o.log')
+for i in hirsh:
+    print "%10.3s %10.4f" % (i[0], i[1])
+
+
 

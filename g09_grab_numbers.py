@@ -60,11 +60,28 @@ def find_ccsdt_energy(file_name):
             break
     for line in log_file:
         collect += line[1:-1]
-    print collect
     collect = re.sub('\\n ', '', collect)
     energy = 0.
     for i in collect.split('\\'):
         if 'CCSD(T)=' in i:
+            energy = i.split('=')[1]
+            break
+    return float(energy)
+
+def find_ccsd_energy(file_name):
+    log_file = open('%s' % file_name)
+    collect = ''
+    for line in log_file:
+        if 'Version=' in line:
+            break
+        if 'State=' in line:
+            break
+    for line in log_file:
+        collect += line[1:-1]
+    collect = re.sub('\\n ', '', collect)
+    energy = 0.
+    for i in collect.split('\\'):
+        if 'CCSD=' in i:
             energy = i.split('=')[1]
             break
     return float(energy)
@@ -157,7 +174,53 @@ def find_B05(file_name):
             B13 = float(line.split()[3])
     return [B05, B13]
 
+def find_hirsh(file_name):
+    log_file = open('%s' % file_name, 'r')
+    hirsh = []
+    for line in log_file:
+        if 'Hirshfeld charges, spin densities, dipoles,' in line:
+            break
+    k = 0
+    for line in log_file:
+        if k == 0:
+            k += 1
+            continue
+        elif 'Tot' in line:
+            break
+        else:
+            hirsh.append((line.split()[1], float(line.split()[2])))
+    return hirsh
 
+def find_mull(file_name):
+    log_file = open('%s' % file_name, 'r')
+    mull = []
+    for line in log_file:
+        if 'Mulliken charges:' in line:
+            break
+    k = 0
+    for line in log_file:
+        if k == 0:
+            k += 1
+            continue
+        elif 'Sum of Mulliken charges' in line:
+            break
+        else:
+            mull.append((line.split()[1], float(line.split()[2])))
+    return mull
+
+# Returns the absolute dipole moment of the system
+def find_dipole(file_name):
+    gaus_out = open('%s' % file_name, 'r')
+    dipole = 0
+    for line in gaus_out:
+        if 'Dipole moment' in line:
+            break
+    for line in gaus_out:
+        if '    X=    ' in line:
+            dipole = float(line.split()[7])
+        elif 'Results using SCF density:' in line:
+            break
+    return dipole
 
 
 
